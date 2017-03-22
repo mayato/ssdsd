@@ -24,11 +24,11 @@
    function ajaxTest(){  
        $.ajax({  
        data:$('#user').serialize(),  
-       type:"GET",  
-       dataType: 'json',  
+       type:"post",  
+     dataType: 'json', 
        url:"/ssdsd/user/loginjson",
        async:false,
-       contentType:"application/json",
+     /* contentType:"application/json", */
        /* error:function(data){  
            alert("出错了！！:"+data.msg);           
        },   */
@@ -47,13 +47,15 @@
         	      $.cookie("username", "", { expires: -1 });
         	      $.cookie("password", "", { expires: -1 });
         	    }
-         window.location.href="/ssdsd/user/showview/validate";  
+         window.location.href="/ssdsd/user/showview/validate"; 
+         
         }
         else
-        {	alert("账号或密码错误"+data.msg);
+        	
+        {	alert(data.msg);
         $("#txt_username").val("");
 	    $("#txt_password").val("");
-        	
+	    
         }
 	}
        
@@ -81,7 +83,7 @@ alert("注册成功");
           </label>
         </p>
         
-        <p class="submit"><a href="/ssdsd/user/showview/register"><input type="button" value="注册"><input type="submit" name="commit" value="登录" onclick="ajaxTest();return false;"></a></p>
+        <p class="submit"><a href="/ssdsd/user/showview/register"><input type="button" value="注册"></a><input type="button" name="commit" value="登录" onclick="ajaxTest();"></p>
       </form>
       
     </div>

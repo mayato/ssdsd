@@ -32,6 +32,12 @@ public class GoodsServiceImpl implements IGoodsService {
 		return goodsDao.selectByType(type);
 	}
 
+	@Override
+	public List<Goods> selectByNameLike(String name) {
+		
+		return goodsDao.selectByNameLike(name);
+	}
+
 	
 	
 }

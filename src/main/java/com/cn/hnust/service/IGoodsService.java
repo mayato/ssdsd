@@ -9,4 +9,5 @@ public interface IGoodsService {
 	public List<Goods> getgoodsDesc();
 	public  Goods selectselectByPrimaryKey(Integer goodsId);
 	public List<Goods> getgoodschoose(String type);
+	public List<Goods> selectByNameLike(String name);
 }

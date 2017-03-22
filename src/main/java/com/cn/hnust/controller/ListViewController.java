@@ -60,4 +60,23 @@ public class ListViewController {
 		
 		return model;
 	}
+	@RequestMapping("/findProductBySearch")
+	public ModelAndView search(@RequestParam String name,
+			@RequestParam(required=true,defaultValue="1") Integer page) {
+		ModelAndView model=new ModelAndView();
+		System.out.println(name);
+		model.setViewName("product_search");
+		PageHelper.startPage(page, 2);
+		List<Goods> goods = goodsService.selectByNameLike(name);
+		PageInfo<Goods> p=new PageInfo<Goods>(goods);
+		System.out.println(p.getList());
+		if (page==0||p.getPages()==0) {
+			model.addObject("error","没有此商品");
+			return model;
+		}
+		model.addObject("goods", goods);
+		model.addObject("page",p);
+		model.addObject("name",name);
+		return model;
+	}
 }

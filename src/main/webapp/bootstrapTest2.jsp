@@ -87,7 +87,7 @@ td {
        
         //生成表格
         function buildTable(userName,pageNumber,pageSize) {
-        	 var url =  urlRootContext + "/list.do"; //请求的网址
+        	 var url =  urlRootContext + "/admingoodslist"; //请求的网址
              var reqParams = {'userName':userName, 'pageNumber':pageNumber,'pageSize':pageSize};//请求数据
              $(function () {   
              	  $.ajax({
@@ -100,7 +100,7 @@ td {
              	            if(data.isError == false) {
              	           // options.totalPages = data.pages;
              	        var newoptions = {  
-                        currentPage: 1,  //当前页数
+                        currentPage: data.currentPage,  //当前页数
                         totalPages: data.pages==0?1:data.pages,  //总页数
                         size:"normal",  
                         alignment:"center",  
@@ -129,9 +129,9 @@ td {
          if (dataList.length > 0 ) {
              $(dataList).each(function(){//重新生成
              	    $("#tableBody").append('<tr>');
-                    $("#tableBody").append('<td>' + this.userId + '</td>');
-                    $("#tableBody").append('<td>' + this.userName + '</td>');
-                    $("#tableBody").append('<td>' + this.userPassword + '</td>');
+                    $("#tableBody").append('<td>' + this.goodsId + '</td>');
+                    $("#tableBody").append('<td>' + this.goodsName + '</td>');
+                    $("#tableBody").append('<td>' + this.price + '</td>');
                     $("#tableBody").append('<td>' + this.userEmail + '</td>');
                     $("#tableBody").append('</tr>');
              	    });  

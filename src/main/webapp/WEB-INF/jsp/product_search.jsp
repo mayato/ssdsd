@@ -49,41 +49,41 @@
 	<c:if  test="${page.pages!=0}">
 	<c:if  test="${page.pages>5}">
 	<c:if  test="${page.pageNum-2>0}" >
-	<li class="prePage"><a  href="/ssdsd/goodslist?page=${page.prePage}">上一页</a></li>
+	<li class="prePage"><a  href="/ssdsd/findProductBySearch?page=${page.prePage}&name=${name}">上一页</a></li>
 	<!-- <li class="disablepage">上一页 &lt;&lt;</li> -->
 					<!-- <li class="currentpage">1</li> -->
 			<c:if test="${page.pageNum+2>page.pages}">
 		<c:forEach begin="${page.pages-4}" end="${page.pages}"  var="s"  step="1">        
-					<li><a href="/ssdsd/goodslist?page=${s}">${s}</a>
+					<li><a href="/ssdsd/findProductBySearch?page=${s}&name=${name}">${s}</a>
 					</li>
 				</c:forEach>	
 			</c:if>
 			<c:if test="${page.pageNum+2<page.pages+1}">		
 	  <c:forEach begin="${page.pageNum-2}" end="${page.pageNum+2}"  var="s"  step="1">        
-					<li><a href="/ssdsd/goodslist?page=${s}">${s}</a>
+					<li><a href="/ssdsd/findProductBySearch?page=${s}&name=${name}">${s}</a>
 					</li>	
 	  </c:forEach>
 		</c:if>	
 	  </c:if>
 	<c:if  test="${page.pageNum-2<1}" >
-	 <li class="prePage"><a href="/ssdsd/goodslist?page=${page.prePage}">上一页</a></li>
+	 <li class="prePage"><a href="/ssdsd/findProductBySearch?page=${page.prePage}&name=${name}">上一页</a></li>
 	<!-- <li class="disablepage">上一页 &lt;&lt;</li> -->
 					<!-- <li class="currentpage">1</li> -->
 	<c:forEach begin="1" end="5"  var="s"  step="1"> 
-					<li><a href="/ssdsd/goodslist?page=${s}">${s}</a>
+					<li><a href="/ssdsd/findProductBySearch?page=${s}&name=${name}">${s}</a>
 					
 					</li>		
 	</c:forEach>
-	</c:if>
+	</c:if>	
 	</c:if>
 	<c:if  test="${page.pages<6}">
-	<li class="prePage"><a  href="/ssdsd/goodstype/${goods[0].type}?page=${page.prePage}">上一页</a></li>
+	<li class="prePage"><a  href="/ssdsd/findProductBySearch?page=${page.prePage}&name=${name}">上一页</a></li>
 	<c:forEach begin="1" end="${page.pages}"  var="s"  step="1">        
-			<li><a href="/ssdsd/goodstype/${goods[0].type}?page=${s}">${s}</a>
+			<li><a href="/ssdsd/findProductBySearch?page=${s}&name=${name}">${s}</a>
 			</li>
 		</c:forEach>
-	</c:if>					
-	<li class="nextpage"><a href="/ssdsd/goodslist?page=${page.nextPage}">下一页&gt;&gt;</a>
+	</c:if>			
+	<li class="nextpage"><a href="/ssdsd/findProductBySearch?page=${page.nextPage}&name=${name}">下一页&gt;&gt;</a>
 	</li>	
 	</c:if>
 	

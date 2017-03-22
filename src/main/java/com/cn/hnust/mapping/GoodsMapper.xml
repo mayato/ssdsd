@@ -26,6 +26,12 @@
     from goods
     where type = #{type,jdbcType=VARCHAR}
   </select>
+  <select id="selectByNameLike" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goods_name like CONCAT('%',#{goodsName},'%') 
+  </select>
   <select id="getgoodsDesc" resultMap="BaseResultMap"  >
     select 
     <include refid="Base_Column_List" />

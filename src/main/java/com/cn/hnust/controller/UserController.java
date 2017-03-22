@@ -37,13 +37,18 @@ import com.sun.javafx.collections.MappingChange.Map;
        @RequestMapping("/loginjson")
        public @ResponseBody HashMap<String, Object> login(@RequestParam String userName,@RequestParam String password,Model model) throws IOException{  
            /*System.out.println(request.getParameter("userName"));  */
-           HashMap<String, Object> map = new HashMap<String,Object>();     
-           if(userName.equals("123")){  
-               System.out.println("城东");  
+           HashMap<String, Object> map = new HashMap<String,Object>();
+           User user=userService.getUserByName(userName);
+                   
+           if (user==null) {
+        	   map.put("msg", "用户名不存在");
+        	   return map; 
+		  }  
+           if(user.getPassword().equals(password)){  
                map.put("msg", "成功");
                model.addAttribute("uname", userName); 
            }else{  
-               map.put("msg", "失败");  
+               map.put("msg", "密码错误");  
            }  
            return map;  
        } 

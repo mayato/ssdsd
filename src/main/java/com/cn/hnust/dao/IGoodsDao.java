@@ -2,6 +2,8 @@ package com.cn.hnust.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.cn.hnust.pojo.Goods;
 
 public interface IGoodsDao {
@@ -20,4 +22,6 @@ public interface IGoodsDao {
     int updateByPrimaryKey(Goods record);
 
 	List<Goods> selectByType(String type);
+
+	List<Goods> selectByNameLike(@Param(value = "goodsName") String name);
 }
