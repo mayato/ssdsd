@@ -46,7 +46,7 @@
         <p><input id="txt_username" type="text" name="userName"  placeholder="用户名" ><span>*</span>${error}</p>
         <p><input id="txt_password"type="password" name="password" placeholder="密码"><span>*</span></p>
         <p><input id="txt_password"type="password" name="repassword" placeholder="重复密码"><span>*</span></p>
-        <p><input id="txt_password"type="text" name="email" placeholder="邮箱"><span>*</span></p>
+        <p><input id="txt_password"type="email" name="email" placeholder="邮箱" required ><span>*</span></p>
         <p><input id="txt_password"type="text" name="tel" placeholder="手机号"></p>
         <p class="remember_me">
           <label>

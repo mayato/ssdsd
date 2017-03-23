@@ -77,15 +77,26 @@
          $("#tableBody").empty();//清空表格内容
          if (dataList.length > 0 ) {
              $(dataList).each(function(){//重新生成
-             	    $("#tableBody").append('<tr>');
+             	  /*  $("#tableBody").append('<tr>');
                     $("#tableBody").append('<td>' + this.goodsId + '</td>');
                     $("#tableBody").append('<td>' + this.goodsName + '</td>');
                     $("#tableBody").append('<td>' + this.type + '</td>');
                     $("#tableBody").append('<td>' + this.price + '</td>');
                     $("#tableBody").append('<td>' + this.remark + '</td>');
                     $("#tableBody").append('<td>' + this.salenum + '</td>');
-                    $("#tableBody").append('</tr>');
-             	    });  
+                    $("#tableBody").append('</tr>');  
+                  $("#tableBody").append('<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default">修改</a><a href="" class="btn btn-danger">删除</a> </div> </td>  ' );*/
+            	 $("#tableBody").append('<tr>'
+            	+'<td>' + this.goodsId + '</td>'
+            	+'<td>' + this.goodsName + '</td>'
+            	+'<td>' + this.type + '</td>'
+            	+'<td>' + this.price + '</td>'
+            	+'<td>' + this.remark + '</td>'
+            	+'<td>' + this.salenum + '</td>'
+            	+'<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default">修改</a><a href="" class="btn btn-danger">删除</a> </div> </td>  '
+            	+'</tr>'
+            	 );
+             });  
              	    } else {             	            	
              	          $("#tableBody").append('<tr><th colspan ="4"><center>查询无数据</center></th></tr>');
              	    }

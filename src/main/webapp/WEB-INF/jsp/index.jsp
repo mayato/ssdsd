@@ -10,6 +10,7 @@
 
 <body class="main">
 
+
 	<%@include file="head.jsp"%>
 	<%@include file="menu_search.jsp" %>
 	<div id="divad">

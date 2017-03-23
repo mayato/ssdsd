@@ -91,7 +91,7 @@ import com.sun.javafx.collections.MappingChange.Map;
           return view;
        } 
        @RequestMapping("/cancel")  
-       public ModelAndView cancel(@ModelAttribute("uname") String string, SessionStatus sessionStatus){
+       public ModelAndView cancel( SessionStatus sessionStatus){
     	   sessionStatus.setComplete(); 
     	   ModelAndView view = new ModelAndView("validateCancel");
            return view;
