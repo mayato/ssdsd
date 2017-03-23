@@ -7,11 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title></title>
 
-        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <link href="/ssdsd/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <script src="/ssdsd/js/jquery-3.1.1.min.js"></script>
+        <script src="/ssdsd/js/bootstrap/bootstrap.min.js"></script>
+        <script src="/ssdsd/js/bootstrap/bootstrap-paginator.min.js"></script>
+        <script src="/ssdsd/js/admingoods.js"></script>
     </head>
-
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -29,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a class="icon-bar" href="#">网站设置</a>
-                        </li>
+                        </li> 
                         <li><a href="#">商品查询</a>
                         </li>
                         <li><a href="#">增加商品</a>
@@ -63,7 +64,7 @@
                                     <input type="text" class="form-control" id="name" placeholder="请输入名称">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default">开始搜索</button>
+                                    <button id=queryButton type="submit" class="btn btn-default">开始搜索</button>
                                 </div>
                             </form>
                         </div>
@@ -75,13 +76,12 @@
                         <table class="table table-striped ">
                             <thead>
                                 <tr>
-                                    <th>编号</th>
-                                    <th>图标</th>
-                                    <th>名称</th>
+                                    <th>商品ID</th>
+                                    <th>商品名称</th>
+                                    <th>商品类型</th>
                                     <th>价格</th>
-                                    <th>邮费</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
+                                    <th>备注</th>
+                                    <th>销量</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody">
@@ -105,8 +105,9 @@
                             </tbody> -->
                         </table>
                     </div>
-                    <ul class="pagination" style="float: right;">
-                        <li><a href="#">&laquo;</a>
+                    <div id="bottomTab"></div>
+                    <!-- <ul class="pagination" id="bottomTab1" style="float: right;">
+                         <li><a href="#">&laquo;</a>
                         </li>
                         <li class="active"><a href="#">1</a>
                         </li>
@@ -119,8 +120,9 @@
                         <li><a href="#">5</a>
                         </li>
                         <li><a href="#">&raquo;</a>
-                        </li>
-                    </ul>
+                        </li> 
+                    </ul> -->
+                    <</div>
                 </div>
             </div>
         </div>

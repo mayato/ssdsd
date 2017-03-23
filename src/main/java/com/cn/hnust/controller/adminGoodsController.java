@@ -25,7 +25,7 @@ public class adminGoodsController {
 	public @ResponseBody HashMap<String, Object>  admingoodslist(
 			@RequestParam(required=true,defaultValue="1") Integer pageNumber,
 			@RequestParam(required=true,defaultValue="2") Integer pageSize,
-			@RequestParam Integer userName,
+			@RequestParam String userName,
 			Model model){
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		PageHelper.startPage(pageNumber, pageSize);
@@ -42,7 +42,10 @@ public class adminGoodsController {
 		 map.put("dataList", goods);
 		/*model.addObject("goods", goods);*/
 		/*model.addObject("page",p);*/
-		
 		return map;
+	}
+	@RequestMapping("/admin")
+	public String index(Model model) {
+		return "admin/admingoods";
 	}
 }

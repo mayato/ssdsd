@@ -1,57 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bootstrap分页实例</title>
-<link href="/ssdsd/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script src="/ssdsd/js/jquery-3.1.1.min.js"></script>
-<script src="/ssdsd/js/bootstrap/bootstrap.min.js"></script>
-<script src="/ssdsd/js/bootstrap/bootstrap-paginator.min.js"></script>
-<style type="text/css">
-#queryDiv {
- margin-right: auto;
- margin-left: auto;
- width:600px;
-}
-#textInput {
- margin-top: 10px;
-}
-#tableResult {
- margin-right: auto;
- margin-left: auto;
- width:600px;
-}
-td {
- width:150px
-}
-</style>
-</head>
-<body>
-	<div id = "queryDiv">
-		<input id = "textInput" type="text" placeholder="请输入用户名" >
-		<button id = "queryButton" class="btn btn-primary" type="button">查询</button>
-	</div>
-	<form id="form1">
-		<table class="table table-bordered" id = 'tableResult'>
-			<caption>查询用户结果</caption>
-			<thead>
-				<tr>
-					<th>商品ID</th>
-					<th>商品名称</th>
-					<th>商品类型</th>
-					<th>商品种类</th>
-				</tr>
-			</thead>
-			<tbody id="tableBody">
-			</tbody>
-		</table>
-		<!-- 底部分页按钮 -->
-		<div id="bottomTab"></div>
-	</form>
-	<script type='text/javascript'>    
-	    var PAGESIZE = 10;
+       
+
+     var PAGESIZE = 25;
         var options = {  
             currentPage: 1,  //当前页数
             totalPages: 10,  //总页数，这里只是暂时的，后头会根据查出来的条件进行更改
@@ -133,6 +82,8 @@ td {
                     $("#tableBody").append('<td>' + this.goodsName + '</td>');
                     $("#tableBody").append('<td>' + this.type + '</td>');
                     $("#tableBody").append('<td>' + this.price + '</td>');
+                    $("#tableBody").append('<td>' + this.remark + '</td>');
+                    $("#tableBody").append('<td>' + this.salenum + '</td>');
                     $("#tableBody").append('</tr>');
              	    });  
              	    } else {             	            	
@@ -153,16 +104,14 @@ td {
         $(function() {
         	
         	//生成底部分页栏
-            $('#bottomTab').bootstrapPaginator(options);     
+        	 $('#bottomTab').bootstrapPaginator(options);       
         	
-        	buildTable("",1,10);//默认空白查全部
-        	
+        	buildTable("",1,25);//默认空白查全部
+        	$('.pagination').css("float","right");
             //创建结算规则
             $("#queryButton").bind("click",function(){
             	var userName = $("#name").val();	
             	buildTable(userName,1,PAGESIZE);
             });
         });
-    </script>
-</body>
-</html>
+   
