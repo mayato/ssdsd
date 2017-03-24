@@ -1,9 +1,11 @@
 package com.cn.hnust.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.hnust.dao.IAdminDao;
@@ -25,6 +28,7 @@ import com.cn.hnust.service.IGoodsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+
 @Controller
 @SessionAttributes({"aname"}) 
 public class adminGoodsController {
@@ -32,8 +36,6 @@ public class adminGoodsController {
 	 private IGoodsService goodsService;
 	@Resource
 	 private  IAdminService adminService;
-		
-	
 	@RequestMapping("/admingoodslist")
 	public @ResponseBody HashMap<String, Object>  admingoodslist(
 			@RequestParam(required=true,defaultValue="1") Integer pageNumber,
@@ -41,8 +43,15 @@ public class adminGoodsController {
 			@RequestParam String userName,
 			Model model){
 		HashMap<String, Object> map = new HashMap<String,Object>();
-		PageHelper.startPage(pageNumber, pageSize);
-		List<Goods> goods = goodsService.getgoodsDesc();
+		List<Goods> goods;
+		if (userName=="") {
+			PageHelper.startPage(pageNumber, pageSize);
+			 goods = goodsService.getgoodsDesc();
+		}
+		else{
+			PageHelper.startPage(pageNumber, pageSize);
+			 goods = goodsService.selectByNameLike(userName);
+		}		
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
 		System.out.println(p.getList());
 		if (pageNumber==0||p.getPages()==0) {
@@ -57,6 +66,20 @@ public class adminGoodsController {
 		/*model.addObject("page",p);*/
 		return map;
 	}
+	@RequestMapping("/cancel/good")  
+    public@ResponseBody HashMap<String, Object> cancelgoods(@RequestParam Integer id){
+ 	        int  a= goodsService.deleteByPrimaryKey(id);
+ 	       HashMap<String, Object> map = new HashMap<String,Object>();
+ 	        if (a>0) {
+ 	        	map.put("msg","1");
+			}
+ 	        else {
+ 	        	map.put("msg","0");
+			}
+ 	 
+ 	        return map;
+    }
+	
 	@RequestMapping("/admin")
 	public String index(Model model) {	
 		return "admin/adminindex";
@@ -91,6 +114,27 @@ public class adminGoodsController {
 	 @RequestMapping("/cancel/admin")  
      public ModelAndView cancel( SessionStatus sessionStatus){
   	   sessionStatus.setComplete(); 
+  	   ModelAndView view = new ModelAndView("admin/adminindex");
+         return view;
+     }
+	 @RequestMapping("/add/admin")  
+     public ModelAndView add( MultipartFile file, HttpServletRequest request,
+ 			Goods goods, String categoryName){
+			 String path = request.getSession().getServletContext() .getRealPath("upload");
+			 System.out.println(path);
+			 String fileName = file.getOriginalFilename();
+			 File targetFile = new File(path, fileName);
+			 goods.setUrl(fileName);
+		int a=goodsService.insert(goods);
+			 if (!targetFile.exists()) {
+					targetFile.mkdirs();
+				}
+				try {
+					// 保存文件
+					file.transferTo(targetFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
   	   ModelAndView view = new ModelAndView("admin/adminindex");
          return view;
      }

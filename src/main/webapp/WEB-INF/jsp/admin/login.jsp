@@ -11,10 +11,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Signin Template for Bootstrap</title>
+    <script type="text/javascript" src="/ssdsd/js/jquery-3.1.1.min.js"></script>
     <link href="/ssdsd/css//bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/ssdsd/css/signin.css" rel="stylesheet">
+    <script src="/ssdsd/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="/ssdsd/js/adminlogin.js" type="text/javascript"></script>    
   </head>
-
   <body>
 <c:if test="${error!=null}">
 <script>
@@ -31,10 +33,10 @@ alert("用户名或密码错误");
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> 记住用户名和密码
+            <input type="checkbox" id=ck_rmbUser value="remember-me"> 记住用户名和密码
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Save()">登陆</button>
       </form>
 
     </div> 

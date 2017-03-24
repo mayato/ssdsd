@@ -10,4 +10,6 @@ public interface IGoodsService {
 	public  Goods selectselectByPrimaryKey(Integer goodsId);
 	public List<Goods> getgoodschoose(String type);
 	public List<Goods> selectByNameLike(String name);
+	public int deleteByPrimaryKey(Integer id);
+	public int insert(Goods goods);
 }

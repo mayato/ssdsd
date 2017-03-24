@@ -9,10 +9,11 @@
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="salenum" property="salenum" jdbcType="INTEGER" />
-    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR"/>
+    <result column="place" property="place" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    goods_id, goods_name, type, price, url, remark, salenum, introduce
+    goods_id, goods_name, type, price, url, remark, salenum, introduce, place
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -45,10 +46,10 @@
   <insert id="insert" parameterType="com.cn.hnust.pojo.Goods" >
     insert into goods (goods_id, goods_name, type, 
       price, url, remark, salenum, 
-      introduce)
+      introduce,place)
     values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{price,jdbcType=REAL}, #{url,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{salenum,jdbcType=INTEGER}, 
-      #{introduce,jdbcType=VARCHAR})
+      #{introduce,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cn.hnust.pojo.Goods" >
     insert into goods
@@ -77,6 +78,9 @@
       <if test="introduce != null" >
         introduce,
       </if>
+      <if test="place != null" >
+        place,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="goodsId != null" >
@@ -102,6 +106,9 @@
       </if>
       <if test="introduce != null" >
         #{introduce,jdbcType=VARCHAR},
+      </if>
+       <if test="place != null" >
+        #{place,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -129,6 +136,9 @@
       <if test="introduce != null" >
         introduce = #{introduce,jdbcType=VARCHAR},
       </if>
+       <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
     </set>
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -141,6 +151,7 @@
       remark = #{remark,jdbcType=VARCHAR},
       salenum = #{salenum,jdbcType=INTEGER},
       introduce = #{introduce,jdbcType=VARCHAR}
+      place = #{place,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

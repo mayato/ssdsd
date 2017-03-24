@@ -38,6 +38,17 @@ public class GoodsServiceImpl implements IGoodsService {
 		return goodsDao.selectByNameLike(name);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(Integer id) {		
+		return goodsDao.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public int insert(Goods goods) {
+		
+		return goodsDao.insert(goods);
+	}
+
 	
 	
 }

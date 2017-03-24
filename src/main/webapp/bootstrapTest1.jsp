@@ -155,12 +155,13 @@ td {
         	//生成底部分页栏
             $('#bottomTab').bootstrapPaginator(options);     
         	
-        	buildTable("",1,10);//默认空白查全部
+        	//buildTable("",1,10);//默认空白查全部
         	
             //创建结算规则
             $("#queryButton").bind("click",function(){
             	var userName = $("#textInput").val();	
             	buildTable(userName,1,PAGESIZE);
+            	
             });
         });
     </script>

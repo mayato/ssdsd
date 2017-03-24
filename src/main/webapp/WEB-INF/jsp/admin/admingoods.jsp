@@ -34,7 +34,7 @@
                       
                         <li class="active"><a href="/ssdsd/admin/admingoods">商品查询</a>
                         </li>
-                        <li><a href="#">增加商品</a>
+                        <li><a href="/ssdsd/admin/adminadd">增加商品</a>
                         </li>
                         <li><a href="#">库存管理</a>
                         </li>
@@ -71,7 +71,7 @@
                                     <input type="text" class="form-control" id="name" placeholder="请输入名称">
                                 </div>
                                 <div class="form-group">
-                                    <button id=queryButton type="submit" class="btn btn-default">开始搜索</button>
+                                    <button id=queryButton type="button" class="btn btn-default">开始搜索</button>
                                 </div>
                             </form>
                         </div>
@@ -89,6 +89,7 @@
                                     <th>价格</th>
                                     <th>备注</th>
                                     <th>销量</th>
+                                    <th>产地</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody">
@@ -129,7 +130,7 @@
                         <li><a href="#">&raquo;</a>
                         </li> 
                     </ul> -->
-                    <</div>
+                    </div>
                 </div>
             </div>
         </div>

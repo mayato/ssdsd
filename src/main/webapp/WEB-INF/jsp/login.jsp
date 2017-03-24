@@ -16,7 +16,7 @@
 	    $("#ck_rmbUser").attr("checked", true);
 	    $("#txt_username").val($.cookie("username"));
 	    $("#txt_password").val($.cookie("password"));
-	    $('#txt_username').bind('input propertychange', function() {   
+	    $('#txt_username').bind('input propertychange', function() {
 	    	 $("#txt_password").val("");
 	 	});   
 	    }

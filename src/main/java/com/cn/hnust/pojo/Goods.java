@@ -16,6 +16,7 @@ public class Goods {
     private Integer salenum;
 
     private String introduce;
+    private String place;
 
     public Integer getGoodsId() {
         return goodsId;
@@ -29,7 +30,15 @@ public class Goods {
         return goodsName;
     }
 
-    public void setGoodsName(String goodsName) {
+    public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public void setGoodsName(String goodsName) {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 

@@ -1,6 +1,6 @@
        
 
-     var PAGESIZE = 25;
+     var PAGESIZE = 15;
         var options = {  
             currentPage: 1,  //当前页数
             totalPages: 10,  //总页数，这里只是暂时的，后头会根据查出来的条件进行更改
@@ -86,16 +86,20 @@
                     $("#tableBody").append('<td>' + this.salenum + '</td>');
                     $("#tableBody").append('</tr>');  
                   $("#tableBody").append('<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default">修改</a><a href="" class="btn btn-danger">删除</a> </div> </td>  ' );*/
-            	 $("#tableBody").append('<tr>'
-            	+'<td>' + this.goodsId + '</td>'
+            	 $("#tableBody").append('<tr id=tr'+this.goodsId+ '>'
+            	+'<td id="goodsid">' + this.goodsId + '</td>'
             	+'<td>' + this.goodsName + '</td>'
             	+'<td>' + this.type + '</td>'
             	+'<td>' + this.price + '</td>'
             	+'<td>' + this.remark + '</td>'
             	+'<td>' + this.salenum + '</td>'
-            	+'<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default">修改</a><a href="" class="btn btn-danger">删除</a> </div> </td>  '
+            	+'<td>' + this.place + '</td>'
+            	+'<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default">修改</a>'
+            	+'<a href="" class="btn btn-danger" id="goodsdelete" onclick="goodsdelete('+this.goodsId+');return false;">删除</a> </div> </td>'
             	+'</tr>'
             	 );
+            	
+            	 
              });  
              	    } else {             	            	
              	          $("#tableBody").append('<tr><th colspan ="4"><center>查询无数据</center></th></tr>');
@@ -109,20 +113,41 @@
              	        }
              	    });
                });
-        }
-        
+        }  
+        function  goodsdelete(goodsid){
+        	$("#tr"+ goodsid).remove();       	
+            var date={'id':goodsid}; 
+            	 $.ajax({  
+            	       data:date,
+            	       type:"post",  
+            	     dataType: 'json', 
+            	       url:"/ssdsd/cancel/good",
+            	       async:false,
+            	       error:function(data){  
+            	           alert("服务器繁忙");  
+            	       },
+            	       success:function(data){
+            	    	   if(data.msg=="1"){	   
+            	    		   $("#tr"+ goodsid).remove();
+            	    	   }
+            	       }
+            	 });
+            };
         //渲染完就执行
-        $(function() {
-        	
+        $(function() {     	
         	//生成底部分页栏
         	 $('#bottomTab').bootstrapPaginator(options);       
         	
-        	buildTable("",1,25);//默认空白查全部
-        	$('.pagination').css("float","right");
+        	buildTable("",1,15);//默认空白查全部
+       	$('.pagination').css("float","right");
             //创建结算规则
             $("#queryButton").bind("click",function(){
             	var userName = $("#name").val();	
             	buildTable(userName,1,PAGESIZE);
             });
+            
+           
+            
+            
         });
    
