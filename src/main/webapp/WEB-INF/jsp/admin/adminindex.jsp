@@ -38,9 +38,9 @@ alert("登陆成功");
                         
                         <li><a href="/ssdsd/admin/admingoods">商品查询</a>
                         </li>
-                        <li><a href="/ssdsd/admin/adminadd">增加商品</a>
+                        <li><a href="/ssdsd/admin/adminadd">增修商品</a>
                         </li>
-                        <li><a href="#">库存管理</a>
+                        <li><a href="/ssdsd/admin/adminstore">库存管理</a>
                         </li>
                         <li><a href="#">订单管理</a>
                         </li>

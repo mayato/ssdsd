@@ -27,6 +27,8 @@ import com.cn.hnust.service.IAdminService;
 import com.cn.hnust.service.IGoodsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.glass.ui.View;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
 
 @Controller
@@ -79,16 +81,35 @@ public class adminGoodsController {
  	 
  	        return map;
     }
+	@RequestMapping("/cancel/Modify")  
+    public@ResponseBody HashMap<String, Object> cancelModify(@RequestParam Integer id){
+ 	  Goods goods= goodsService.selectselectByPrimaryKey(id); 
+ 	  System.out.println(goods);
+ 	       HashMap<String, Object> map = new HashMap<String,Object>();
+ 	        if (goods!=null) {	
+ 	        	map.put("msg","1");
+			}
+ 	        else {
+ 	        	map.put("msg","0");
+			}
+ 	        return map;
+    }
 	
 	@RequestMapping("/admin")
 	public String index(Model model) {	
 		return "admin/adminindex";
 	}
 	@RequestMapping("/admin/{view}")
-	public String show(Model model,@PathVariable("view") String view) {
-		System.out.println(view);
+	public String show(Model model,@PathVariable("view") String view,
+			@RequestParam(value="id",required=false) Integer id ) {
+		
 	if (view==""||view==null) {
 		return "admin/adminindex";
+	}
+	if (id!=null&&view.equals("adminadd")) {
+		 Goods goods= goodsService.selectselectByPrimaryKey(id);
+		 model.addAttribute("goods",goods);
+	 	 
 	}
 	return "admin/"+view;	
 	}
@@ -120,12 +141,18 @@ public class adminGoodsController {
 	 @RequestMapping("/add/admin")  
      public ModelAndView add( MultipartFile file, HttpServletRequest request,
  			Goods goods, String categoryName){
+		 
 			 String path = request.getSession().getServletContext() .getRealPath("upload");
 			 System.out.println(path);
 			 String fileName = file.getOriginalFilename();
 			 File targetFile = new File(path, fileName);
 			 goods.setUrl(fileName);
-		int a=goodsService.insert(goods);
+			 if (goods.getGoodsId()==null) {
+		   int a=goodsService.insert(goods);
+			 }
+			 else{
+				 int a=goodsService.updateByPrimaryKeySelective(goods);
+			 }
 			 if (!targetFile.exists()) {
 					targetFile.mkdirs();
 				}
@@ -135,7 +162,9 @@ public class adminGoodsController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-  	   ModelAndView view = new ModelAndView("admin/adminindex");
+		 
+  	   ModelAndView view = new ModelAndView("admin/admingoods");
+  	   view.addObject("success", "修改成功");
          return view;
      }
 	

@@ -49,6 +49,12 @@ public class GoodsServiceImpl implements IGoodsService {
 		return goodsDao.insert(goods);
 	}
 
+	@Override
+	public int updateByPrimaryKeySelective(Goods goods) {
+		
+		return goodsDao.updateByPrimaryKeySelective(goods);
+	}
+
 	
 	
 }

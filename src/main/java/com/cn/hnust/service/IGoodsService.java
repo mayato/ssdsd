@@ -12,4 +12,5 @@ public interface IGoodsService {
 	public List<Goods> selectByNameLike(String name);
 	public int deleteByPrimaryKey(Integer id);
 	public int insert(Goods goods);
+	public int updateByPrimaryKeySelective(Goods goods);
 }

@@ -11,10 +11,18 @@
         <link href="/ssdsd/css/bootstrap/bootstrap.min.css" rel="stylesheet">
         <script src="/ssdsd/js/jquery-3.1.1.min.js"></script>
         <script src="/ssdsd/js/bootstrap/bootstrap.min.js"></script>
-     
-       
+           <script>
+           $(document).ready(function(){
+        	   var _orderType=$("#_orderTypes").val();
+        	   if(_orderType!=""){
+        	   $("#Type").val(_orderType);
+        	   }
+        	   });
+           </script>
     </head>
     <body>
+       <!-- 储存 -->
+     <input type="hidden" id="_orderTypes"  value="${goods.type}"/>
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -33,9 +41,9 @@
                       
                         <li ><a href="/ssdsd/admin/admingoods">商品查询</a>
                         </li>
-                        <li class="active"><a href="/ssdsd/admin/adminadd">增加商品</a>
+                        <li class="active"><a href="/ssdsd/admin/adminadd">增修商品</a>
                         </li>
-                        <li><a href="#">库存管理</a>
+                        <li><a href="/ssdsd/admin/adminstore">库存管理</a>
                         </li>
                         <li><a href="#">订单管理</a>
                         </li>
@@ -61,21 +69,23 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                                                                    添加商品
+                        商品信息管理
                         </div>
                         <div class="panel-body">
                             <form action="/ssdsd/add/admin" role="form" class="form-inline" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
+                                 <input type="hidden" id="id" name="goodsId" value="${goods.goodsId}"/>
                                     <label for="name">名称*</label>
-                                    <input type="text" class="form-control" id="name" name="goodsName" placeholder="请输入名称">
+                                    <input type="text" class="form-control" id="name" name="goodsName" placeholder="请输入名称"  value="${goods.goodsName}" required>
                                     <label for="Type">种类*</label>
                                     <!-- <input type="text" class="form-control" id="Type" name="type" placeholder="请输入名称"><br> -->
-                                    <select class="form-control" id="Type" name="Type" >
-                                     <option value="竹篮">竹篮</option>
+                                    <select class="form-control" id="Type" name="type" >
+                                     <option selected="selected" value="竹篮">竹篮</option>
                                      <option value="竹席">竹席</option>
                                      <option value="竹筷">竹筷</option>
                                      <option value="竹椅">竹椅</option>
                                      <option value="竹笠">竹笠</option>
+                                     <option value="竹扫帚">竹扫帚</option>
                                      <option value="竹筛">竹筛</option>
                                      <option value="竹扁担">竹扁担</option>
                                      <option value="竹蒸笼">竹蒸笼</option>
@@ -86,18 +96,18 @@
                                      <option value="竹雕">竹雕</option>
                                       </select><br>
                                     <label for="price">价格*</label>
-                                    <input type="text" class="form-control" id="price" name="price" placeholder="请输入名称">
+                                    <input type="text" class="form-control" id="price" name="price" placeholder="请输入价格" value="${goods.price}" required>
                                     <label for="remark">备注&nbsp;</label>
-                                    <input type="text" class="form-control" id="remark" name="remark" placeholder="请输入名称"><br>
+                                    <input type="text" class="form-control" id="remark" name="remark" placeholder="请输入备注" value="${goods.remark} "><br>
                                     <label for="introduce">简介&nbsp;</label>
-                                    <input type="text" class="form-control" id="introduce" name="introduce" placeholder="请输入名称">
+                                    <input type="text" class="form-control" id="introduce" name="introduce" placeholder="请输入简介" value="${goods.introduce}">
                                     <label for="place">产地&nbsp;</label>
-                                    <input type="text" class="form-control" id="place" name="place" placeholder="请输入名称"><br>
+                                    <input type="text" class="form-control" id="place" name="place" placeholder="请输入产地" value="${goods.place}"><br>
                                     <label  for="inputfile">商品图片</label>
                                     <input type="file" id="inputfile" name="file" >
                                 </div>
                                 <div class="form-group" style ="vertical-align: bottom;">
-                                    <button id=queryButton type="submit" class="btn btn-default">开始搜索</button>
+                                    <button id=queryButton type="submit" class="btn btn-default">确认提交</button>
                                     
                                 </div>
                             </form>

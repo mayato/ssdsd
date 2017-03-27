@@ -13,7 +13,7 @@
         <script src="/ssdsd/js/jquery-3.1.1.min.js"></script>
         <script src="/ssdsd/js/bootstrap/bootstrap.min.js"></script>
         <script src="/ssdsd/js/bootstrap/bootstrap-paginator.min.js"></script>
-        <script src="/ssdsd/js/admingoods.js"></script>
+        <script src="/ssdsd/js/adminstore.js"></script>
     </head>
     <body>
     <c:if test="${success!=null}">
@@ -37,11 +37,11 @@ alert("操作成功");
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
                     <ul class="nav navbar-nav">
                       
-                        <li class="active"><a href="/ssdsd/admin/admingoods">商品查询</a>
+                        <li><a href="/ssdsd/admin/admingoods">商品查询</a>
                         </li>
                         <li><a href="/ssdsd/admin/adminadd">增修商品</a>
                         </li>
-                        <li><a href="/ssdsd/admin/adminstore">库存管理</a>
+                        <li class="active"><a href="/ssdsd/admin/adminstore">库存管理</a>
                         </li>
                         <li><a href="#">订单管理</a>
                         </li>
