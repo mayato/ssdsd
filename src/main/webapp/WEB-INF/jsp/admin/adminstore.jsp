@@ -69,14 +69,17 @@ alert("操作成功");
                         <div class="panel-heading">
                             搜索
                         </div>
+                        
                         <div class="panel-body">
                             <form role="form" class="form-inline">
                                 <div class="form-group">
                                     <label for="name">名称</label>
                                     <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                                    
                                 </div>
                                 <div class="form-group">
                                     <button id=queryButton type="button" class="btn btn-default">开始搜索</button>
+                                  
                                 </div>
                             </form>
                         </div>
@@ -85,16 +88,17 @@ alert("操作成功");
                         列表展示
                     -->
                     <div class="table-responsive">
+                      <button id=newButton type="button" class="btn btn-default">新增</button>
                         <table class="table table-striped ">
                             <thead>
                                 <tr>
+                                    <th>库存ID</th>
                                     <th>商品ID</th>
                                     <th>商品名称</th>
-                                    <th>商品类型</th>
-                                    <th>价格</th>
+                                    <th>库存数量</th>
+                                    <th>仓库ID</th>
+                                    <th>仓库名称</th>
                                     <th>备注</th>
-                                    <th>销量</th>
-                                    <th>产地</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody">

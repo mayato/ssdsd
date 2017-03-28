@@ -21,8 +21,8 @@
                 }                 
             },  
             onPageClicked: function (e, originalEvent, type, page) {  
-            	var userName = $("#name").val(); //取内容
-            	buildTable(userName,page,PAGESIZE);//默认每页最多10条
+            	var storeName = $("#name").val(); //取内容
+            	buildTable(storeName,page,PAGESIZE);//默认每页最多10条
             }  
         }  
 
@@ -35,9 +35,9 @@
         
        
         //生成表格
-        function buildTable(userName,pageNumber,pageSize) {
-        	 var url =  urlRootContext + "/admingoodslist"; //请求的网址
-             var reqParams = {'userName':userName, 'pageNumber':pageNumber,'pageSize':pageSize};//请求数据
+        function buildTable(storeName,pageNumber,pageSize) {
+        	 var url =  urlRootContext + "/admin/storelist"; //请求的网址
+             var reqParams = {'storeName':storeName, 'pageNumber':pageNumber,'pageSize':pageSize};//请求数据
              $(function () {   
              	  $.ajax({
              	        type:"POST",
@@ -68,8 +68,8 @@
                 }                 
             },  
             onPageClicked: function (e, originalEvent, type, page) {  
-            	var userName = $("#name").val(); //取内容
-            	buildTable(userName,page,PAGESIZE);//默认每页最多10条
+            	var storeName = $("#name").val(); //取内容
+            	buildTable(storeName,page,PAGESIZE);//默认每页最多10条
             }  
          }             	           
          $('#bottomTab').bootstrapPaginator("setOptions",newoptions); //重新设置总页面数目
@@ -86,16 +86,16 @@
                     $("#tableBody").append('<td>' + this.salenum + '</td>');
                     $("#tableBody").append('</tr>');  
                   $("#tableBody").append('<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default">修改</a><a href="" class="btn btn-danger">删除</a> </div> </td>  ' );*/
-            	 $("#tableBody").append('<tr id=tr'+this.goodsId+ '>'
-            	+'<td id="goodsid">' + this.goodsId + '</td>'
-            	+'<td>' + this.goodsName + '</td>'
-            	+'<td>' + this.type + '</td>'
-            	+'<td>' + this.price + '</td>'
+            	 $("#tableBody").append('<tr id=tr'+this.sId+ '>'
+            	+'<td id="goodsid">' + this.sId + '</td>'
+            	+'<td>' + this.goods.goodsId + '</td>'
+            	+'<td>' + this.goods.goodsName + '</td>'
+            	+'<td>' + this.number + '</td>'
+            	+'<td>' + this.warehouse.warehouseId + '</td>'
+            	+'<td>' + this.warehouse.warehouseName + '</td>'
             	+'<td>' + this.remark + '</td>'
-            	+'<td>' + this.salenum + '</td>'
-            	+'<td>' + this.place + '</td>'
-            	+'<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default" id="goodsModify" onclick="goodsModify('+this.goodsId+');return false;">修改</a>'
-            	+'<a href="" class="btn btn-danger" id="goodsdelete" onclick="goodsdelete('+this.goodsId+');return false;">删除</a> </div> </td>'
+            	+'<td style="width: 150px;"> <div class="btn-group"> <a href="" class="btn btn-default" id="goodsModify" onclick="goodsModify('+this.sId+');return false;">修改</a>'
+            	+'<a href="" class="btn btn-danger" id="goodsdelete" onclick="goodsdelete('+this.sId+');return false;">删除</a> </div> </td>'
             	+'</tr>'
             	 );
             	
@@ -114,32 +114,32 @@
              	    });
                });
         }  
-        function  goodsdelete(goodsid){
-        	$("#tr"+ goodsid).remove();       	
-            var date={'id':goodsid}; 
+        function  goodsdelete(sId){
+        	$("#tr"+ sId).remove();       	
+            var date={'id':sId}; 
             	 $.ajax({  
             	       data:date,
             	       type:"post",  
             	     dataType: 'json', 
-            	       url:"/ssdsd/cancel/good",
+            	       url:"/ssdsd/admin/cancelstore",
             	       async:false,
             	       error:function(data){  
             	           alert("服务器繁忙");  
             	       },
             	       success:function(data){
             	    	   if(data.msg=="1"){	   
-            	    		   $("#tr"+ goodsid).remove();
+            	    		   $("#tr"+ sId).remove();
             	    	   }
             	       }
             	 });
             };
-            function  goodsModify(goodsid){  	
-                var date={'id':goodsid}; 
+            function  goodsModify(sId){  	
+                var date={'id':sId}; 
                 	 $.ajax({  
                 	       data:date,
                 	       type:"post",  
                 	     dataType: 'json', 
-                	       url:"/ssdsd/cancel/Modify",
+                	       url:"/ssdsd/admin/Modifystore",
                 	       async:false,
                 	       error:function(data){  
                 	           alert("服务器繁忙");  
@@ -147,7 +147,7 @@
                 	       success:function(data){
                 	    	   if(data.msg=="1"){	   
                 	    		 /*  alert("1")  */
-                	    		 location.href ='/ssdsd/admin/adminadd?id='+goodsid;
+                	    		 location.href ='/ssdsd/admin/storeadd?id='+sId;
                 	    	   }
                 	       }
                 	 });
@@ -160,9 +160,14 @@
         	buildTable("",1,15);//默认空白查全部
        	$('.pagination').css("float","right");
             //创建结算规则
+      $("#newButton").bind("click",function(){
+    	 
+    	  location.href='/ssdsd/admin/adminaddstore';
+    	  
+      });
             $("#queryButton").bind("click",function(){
-            	var userName = $("#name").val();	
-            	buildTable(userName,1,PAGESIZE);
+            	var storeName = $("#name").val();	
+            	buildTable(storeName,1,PAGESIZE);
             });
             
            

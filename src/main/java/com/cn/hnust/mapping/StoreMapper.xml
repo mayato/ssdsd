@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cn.hnust.dao.AdminDao" >
+<mapper namespace="com.cn.hnust.dao.IStoreDao">
   <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.Store" >
-    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <association property="goods"  javaType="com.cn.hnust.pojo.Goods">
+    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="salenum" property="salenum" jdbcType="INTEGER" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR"/>
+    <result column="place" property="place" jdbcType="VARCHAR" />
+    </association>
+    <association property="warehouse" javaType="com.cn.hnust.pojo.Warehouse">
+     <id column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+    <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR" />
+    <result column="warehouse_place" property="warehousePlace" jdbcType="VARCHAR" />
+    </association>
   </resultMap>
-  <sql id="Base_Column_List" >
-    goods_id, number, remark
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from store
-    where goods_id = #{goodsId,jdbcType=INTEGER}
+    <resultMap id="NewResultMap" type="com.cn.hnust.pojo.Store" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <sql id="Base_Column_List" >
+    s_id, goods_id, number, remark, warehouse_id
+  </sql> 
+ <select id="selectAll" resultMap="BaseResultMap">
+  select  s.*,g.*,w.* from store s join goods g on s.goods_id = g.goods_id join warehouse w on s.warehouse_id = w.warehouse_id 
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from store
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.cn.hnust.pojo.Store" >
-    insert into store (goods_id, number, remark
-      )
-    values (#{goodsId,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.Store" >
+  <select id="selectByNameLike" resultMap="BaseResultMap">
+  select  s.*,g.*,w.* from store s join goods g on s.goods_id = g.goods_id join warehouse w on s.warehouse_id = w.warehouse_id where g.goods_name like #{storeName}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   delete from store
+    where s_id = #{id}
+ </delete>
+ <insert id="insertSelective" parameterType="com.cn.hnust.pojo.Store" >
     insert into store
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        s_id,
+      </if>
       <if test="goodsId != null" >
         goods_id,
       </if>
@@ -37,8 +58,14 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="warehouseId != null" >
+        warehouse_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
       </if>
@@ -48,24 +75,42 @@
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="warehouseId != null" >
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.Store" >
+   <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.Store" >
     update store
     <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
       <if test="number != null" >
         number = #{number,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="warehouseId != null" >
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
     </set>
-    where goods_id = #{goodsId,jdbcType=INTEGER}
+    where s_id = #{sId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.Store" >
     update store
-    set number = #{number,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
-    where goods_id = #{goodsId,jdbcType=INTEGER}
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER}
+    where s_id = #{sId,jdbcType=INTEGER}
   </update>
+  <select id="selectByPrimaryKey" resultMap="NewResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

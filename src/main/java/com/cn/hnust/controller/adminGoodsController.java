@@ -42,17 +42,17 @@ public class adminGoodsController {
 	public @ResponseBody HashMap<String, Object>  admingoodslist(
 			@RequestParam(required=true,defaultValue="1") Integer pageNumber,
 			@RequestParam(required=true,defaultValue="2") Integer pageSize,
-			@RequestParam String userName,
+			@RequestParam String goodsName,
 			Model model){
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		List<Goods> goods;
-		if (userName=="") {
+		if (goodsName=="") {
 			PageHelper.startPage(pageNumber, pageSize);
 			 goods = goodsService.getgoodsDesc();
 		}
 		else{
 			PageHelper.startPage(pageNumber, pageSize);
-			 goods = goodsService.selectByNameLike(userName);
+			 goods = goodsService.selectByNameLike(goodsName);
 		}		
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
 		System.out.println(p.getList());

@@ -21,8 +21,8 @@
                 }                 
             },  
             onPageClicked: function (e, originalEvent, type, page) {  
-            	var userName = $("#name").val(); //取内容
-            	buildTable(userName,page,PAGESIZE);//默认每页最多10条
+            	var goodsName = $("#name").val(); //取内容
+            	buildTable(goodsName,page,PAGESIZE);//默认每页最多10条
             }  
         }  
 
@@ -35,9 +35,9 @@
         
        
         //生成表格
-        function buildTable(userName,pageNumber,pageSize) {
+        function buildTable(goodsName,pageNumber,pageSize) {
         	 var url =  urlRootContext + "/admingoodslist"; //请求的网址
-             var reqParams = {'userName':userName, 'pageNumber':pageNumber,'pageSize':pageSize};//请求数据
+             var reqParams = {'goodsName':goodsName, 'pageNumber':pageNumber,'pageSize':pageSize};//请求数据
              $(function () {   
              	  $.ajax({
              	        type:"POST",
@@ -68,8 +68,8 @@
                 }                 
             },  
             onPageClicked: function (e, originalEvent, type, page) {  
-            	var userName = $("#name").val(); //取内容
-            	buildTable(userName,page,PAGESIZE);//默认每页最多10条
+            	var goodsName = $("#name").val(); //取内容
+            	buildTable(goodsName,page,PAGESIZE);//默认每页最多10条
             }  
          }             	           
          $('#bottomTab').bootstrapPaginator("setOptions",newoptions); //重新设置总页面数目
@@ -134,9 +134,9 @@
             	 });
             };
             function  goodsModify(goodsid){  	
-                var date={'id':goodsid}; 
+                var data={'id':goodsid}; 
                 	 $.ajax({  
-                	       data:date,
+                	       data:data,
                 	       type:"post",  
                 	     dataType: 'json', 
                 	       url:"/ssdsd/cancel/Modify",
@@ -161,8 +161,8 @@
        	$('.pagination').css("float","right");
             //创建结算规则
             $("#queryButton").bind("click",function(){
-            	var userName = $("#name").val();	
-            	buildTable(userName,1,PAGESIZE);
+            	var goodsName = $("#name").val();	
+            	buildTable(goodsName,1,PAGESIZE);
             });
             
            

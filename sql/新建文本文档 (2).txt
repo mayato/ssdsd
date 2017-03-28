@@ -1,0 +1,305 @@
+pagehelper
+http://blog.csdn.net/u012728960/article/details/50791343
+
+//mybatis generator 生成脚本
+Java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig.xml -overwrite
+
+
+//maven 下载很慢
+     <mirror>
+           <id>alimaven</id>
+           <mirrorOf>central</mirrorOf>
+           <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+         </mirror>
+
+       <!-- 中央仓库1 -->
+        <mirror>
+            <id>repo1</id>
+            <mirrorOf>central</mirrorOf>
+            <name>Human Readable Name for this Mirror.</name>
+            <url>http://repo1.maven.org/maven2/</url>
+         </mirror>
+        <!-- 中央仓库2 -->
+        <mirror>
+           <id>repo2</id>
+           <mirrorOf>central</mirrorOf>
+            <name>Human Readable Name for this Mirror.</name>
+           <url>http://repo2.maven.org/maven2/</url>
+        </mirror>
+
+
+suffixOverrides=","//忽略后缀.
+
+//判断没有jqury
+<script language="javascript">
+if(typeof jQuery == 'undefined'){
+    window.alert("没有jquery");
+}
+</script>
+
+ $("#testAjax").click(function(){
+             
+           $.ajax({
+            	  type:"post",
+            	  url:"/user/json1",
+            	  dataType: "json",
+            	  date:"name="+$(#name).val(),
+            	  async: false,
+            	  error:function(data){  
+                      alert("出错了！:"+data.msg);  
+                  },
+                  success:function(data){  
+                      alert("success:"+data.msg);  
+                      $("#result").html(data.msg) ;  
+                  }  
+            	   
+            	   
+            	  });
+               }
+             
+         });
+
+输出序列化表单值的结果
+serialize();
+$("button").click(function(){
+  $("div").text($("form").serialize());
+});
+
+$("#formId").submit();
+
+
+
+//src路径问题 1.客户端也就是JSP HTML等页面 加/ 从tomcat服务器开始 不加/ 则就是替换最后一个斜杠后的内容
+2.服务器端  也就是servlet controller 页面  加/从项目名称开始  不加/则是替换最后一个斜杠后的内容
+
+
+
+
+1.在原来的窗体中直接跳转用
+onClick="window.location.href='你所要跳转的页面';"
+
+2、在新窗体中打开页面用：
+onclick="window.open('你所要跳转的页面')"
+
+
+什么是闭包:
+当内部函数 在定义它的作用域 的外部 被引用时,就创建了该内部函数的闭包 ,如果内部函数引用了位于外部函数的变量,当外部函数调用完毕后,这些变量在内存不会被 释放,因为闭包需要它们.
+
+
+$(selector).toggle()
+该效果适用于通过 jQuery 隐藏的元素，或在 CSS 中声明 display:none 的元素（但不适用于 visibility:hidden 的元素）。
+
+
+<p class="submit"><a href="路径"><input type="button"  value="注册"></a></p>
+
+form span{
+float:left;
+width: 50%;
+clear:both;
+}
+CSS是这样的，text-align:center意思就是说，让这个DIV里的文字水平居中，而line-height:100px;的意思是说，让DIV里面的每一行文字，占的高度为100PX（和那个DIV的高度一样），这样，文字就垂直居中了。也就是说，如果你的DIV是200PX高，那你就让line-height:200px;文字就会垂直居中了。
+
+1、如果是想通过JSP中的java代码调用js某函数，假定函数名为DemoFunction，那么就在jsp中这样写<%out.println("<script>DemoFunction();</script>");%>
+
+
+<c:if test="${sessionScope.uname!=null}">
+	
+	</c:if>
+ display:none;
+http://localhost:8080/ssdsd/user/cancel
+
+
+cancel
+
+
+
+
+1. @RequestParam
+2. @ModelAttributes
+3. @RequestBody
+4. 直接用 POJO作为参数
+
+<-->spring mvc 获取参数
+ @RequestMapping("/param")  
+    public ModelAndView getInfo(@RequestParam("name") String name){  
+          
+        String str = name + " Spring MVC示例";  
+        return new ModelAndView("message", "str", str);  
+    }  
+
+ 访问该方法的url格式为：param?name=hoking(Get方式)
+@RequestMapping("/index/{username}")  
+    public String getMessage(@PathVariable("username") String username){  
+        System.out.println(username);  
+        return "message";  
+</>
+<--url 乱码
+
+1.配置tomcat目录下的service.xml文件
+
+tomcat7/conf/server.xml
+
+给该行代码加上 URIEncoding="UTF-8" 的编码属性
+2.
+@RequestMapping(value="/{tag}")  
+public String getArticleListByTag(HttpServletRequest request, @PathVariable String tag, QueryCondition queryCondition) throws Exception{  
+    tag = new String(tag.getBytes("ISO-8859-1"), "UTF-8");   
+    logger.info("tag: " + tag );
+-->
+
+ String filePath = request.getSession().getServletContext()
+                    .getRealPath("/") + "upload/" + file.getOriginalFilename();
+                File saveDir = new File(filePath);
+                if (!saveDir.getParentFile().exists())
+                    saveDir.getParentFile().mkdirs();
+                 
+                // 转存文件
+                file.transferTo(saveDir);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+注意要在form标签中加上enctype="multipart/form-data"表示该表单是要处理文件的,这是最基本的东西，很多人会忘记然而当上传出错后则去找程序的错误，却忘了这一点
+
+<a href="http://www.baidu.com" target="_Blank">百度</a>
+
+http://localhost:8080/ssdsd/user/showview/product_list
+
+ 
+md5加密
+MessageDigest md=MessageDigest.getInstance("MD5");
+       md.update(message.getBytes());
+       byte[] b=md.digest();
+int 32位，byte8位
+int number = b & 0xff;// 加盐  取得低8位 ，如果不写byte转化为int的时候高24位就会变成1。
+
+--完整代码
+  * @param str 
+     * @return 
+     * @Date: 2013-9-6   
+     * @Author: lulei   
+     * @Description:  32位小写MD5 
+     */  
+    public static String parseStrToMd5L32(String str){  
+        String reStr = null;  
+        try {  
+            MessageDigest md5 = MessageDigest.getInstance("MD5");  
+            byte[] bytes = md5.digest(str.getBytes());  
+            StringBuffer stringBuffer = new StringBuffer();  
+            for (byte b : bytes){  
+                int bt = b&0xff;  
+                if (bt < 16){  
+                    stringBuffer.append(0);  
+                }   
+                stringBuffer.append(Integer.toHexString(bt));  
+            }  
+            reStr = stringBuffer.toString();  
+        } catch (NoSuchAlgorithmException e) {  
+            e.printStackTrace();  
+        }  
+        return reStr;  
+    }  
+
+
+
+
+
+--@Autowired 当容器中有多个可以匹配的bean时（接口有多个实现类），用@Qualifier去选择
+
+@Autowired
+@Qualifier("userDao")
+
+
+
+让a失效
+$('a').removeAttr('href');
+
+
+
+自定义对象也用@param注解.
+在mapper.xml中使用的时候，#{对象别名.属性名}，如#{user.id}
+注意，使用了@pram注解的话在mapper.xml不加parameterType。
+public List<UserExtension> selectAllUsers(
+                        @Param("user") UserExtension user, 
+                        @Param("begin") int begin, 
+                        @Param("end") int end);
+
+
+　处理的方式非常简单，主要是使用git stash命令进行处理，分成以下几个步骤进行处理。
+　　1、先将本地修改存储起来
+　　$ git stash
+　　这样本地的所有修改就都被暂时存储起来 。是用git stash list可以看到保存的信息：
+　　git stash暂存修改
+　　其中stash@{0}就是刚才保存的标记。
+　　2、pull内容
+　　暂存了本地修改之后，就可以pull了。
+　　$ git pull
+　　3、还原暂存的内容
+　　$ git stash pop stash@{0}
+　　系统提示如下类似的信息：
+　　Auto-merging c/environ.c
+CONFLICT (content): Merge conflict in c/environ.c
+　　意思就是系统自动合并修改的内容，但是其中有冲突，需要解决其中的冲突。
+　　4、解决文件中冲突的的部分
+　　打开冲突的文件，会看到类似如下的内容：
+　　git冲突内容
+其中Updated upstream 和=====之间的内容就是pull下来的内容，====和stashed changes之间的内容就是本地修改的内容。碰到这种情况，git也不知道哪行内容是需要的，所以要自行确定需要的内容。
+　　解决完成之后，就可以正常的提交了。
+
+
+已搞定，bootstrap-paginator.js里的listContainer = $("<ul></ul>"),改成listContainer = $("<ul class='pagination'></ul>"),
+
+
+<-- append换行-->
+
+
+$("div").append("<div>"+
+"<ul>"+
+"<li>11</li>"+
+"<li>22</li>"+
+"<li>33</li>"+
+"    </ul>"+
+"</div>")
+
+
+
+
+
+<-- 绑定tr的时候绑定ID，然后用下面这种方法删除-->
+
+$("#tr" + id).remove();
+
+
+$("div:contains('123')[innerHTML='123']")
+
+
+1, $(".class:eq(1)")
+2, $(".class").eq(1)
+
+
+function  goodsdelete(goodsid){
+        	$("#tr"+ goodsid).remove();       	
+            var date={'id':goodsid}; 
+            	 $.ajax({  
+            	       data:date,
+            	       type:"post",  
+            	     dataType: 'json', 
+            	       url:"/ssdsd/cancel/good",
+            	       async:false,
+            	       error:function(data){  
+            	           alert("服务器繁忙");  
+            	       },
+            	       success:function(data){
+            	    	   if(data.msg=="1"){	   
+            	    		   $("#tr"+ goodsid).remove();
+            	    	   }
+            	       }
+                        
+            	 });
+            };
+
+@RequestParam(value="id",required=false) Integer id
