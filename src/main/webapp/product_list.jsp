@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -7,7 +7,7 @@
 
 
 <title>bookStore列表</title>
-<%--导入css --%>
+导入css
 <link rel="stylesheet" href="/ssdsd/css/main.css" type="text/css" />
 </head>
 
@@ -192,3 +192,4 @@
 
 </body>
 </html>
+ --%>

@@ -23,7 +23,9 @@ function value(){
 	       url:"/ssdsd/admin/addstore",
 	       async:false,
 	       error:function(data){  
-	           alert("请输入数字");  
+	           alert("请输入数字"); 
+	           $('#goodsId').val("");
+	           $('#warehouseId').val("");
 	       },
 	       success:function(data){
 	    	   if(data.msg=="1"){
