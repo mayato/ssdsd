@@ -28,7 +28,7 @@ public class IndexController {
 	
 	
 	/** 访问主页 */
-	@RequestMapping("/index")
+	@RequestMapping(value = {"/index","/"})
 	public String index(Model model) {
 		List<Goods> goods = goodsService.getgoodsDesc();
 		model.addAttribute("goods", goods);
