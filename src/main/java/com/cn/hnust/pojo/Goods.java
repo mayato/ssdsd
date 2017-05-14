@@ -7,7 +7,7 @@ public class Goods {
 
     private String type;
 
-    private Float price;
+    private Double price;
 
     private String url;
 
@@ -50,11 +50,11 @@ public class Goods {
         this.type = type == null ? null : type.trim();
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

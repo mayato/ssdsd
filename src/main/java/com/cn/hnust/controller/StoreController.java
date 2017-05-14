@@ -8,12 +8,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.hnust.dao.IWarehouseDao;
+import com.cn.hnust.pojo.Cart;
 import com.cn.hnust.pojo.Goods;
 import com.cn.hnust.pojo.Store;
 import com.cn.hnust.pojo.Warehouse;
@@ -45,12 +47,12 @@ public class StoreController {
 			stores = storeService.selectAll();
 	}
 		else{
-			PageHelper.startPage(pageNumber, pageSize);
+		/*	PageHelper.startPage(pageNumber, pageSize);*/
 			stores = storeService.selectByNameLike(storeName);
 		}	
 		PageInfo<Store> p=new PageInfo<Store>(stores);
 		System.out.println(p.getList());
-		if (pageNumber==0||p.getPages()==0) {
+		if (pageNumber==0) {
 			map.put("isError", true);	
 			return map;
 		}
@@ -75,6 +77,18 @@ public class StoreController {
 	 
 	        return map;
 	}
+	/**
+	 * 测试
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/admin/cancelstore1")
+	public@ResponseBody HashMap<String, Object> cancelgoods1( String id){
+System.out.println(id);
+System.out.println("1");
+return null;
+	}
+	
 	@RequestMapping("/admin/addstore")
 	public @ResponseBody HashMap<String, Object> addstore(@RequestParam Integer goodsId,
 			@RequestParam Integer warehouseId){	
@@ -104,12 +118,15 @@ public class StoreController {
 		System.out.println(store.toString());
 		if (store.getsId()==null) {
 			int a=storeService.insertSelective(store);
+			if(a==0){
+				return new ModelAndView("admin/adminstore").addObject("success", 0);
+			}
 		}
 		else {
 			int a=storeService.updateByPrimaryKeySelective(store);
 		}
 		ModelAndView view = new ModelAndView("admin/adminstore");
-	  	   view.addObject("success", "修改成功");
+	  	   view.addObject("success", 1);
 	         return view;	
 	}
 	@RequestMapping("/admin/Modifystore")  

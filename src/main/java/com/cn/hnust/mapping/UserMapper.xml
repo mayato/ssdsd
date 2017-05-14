@@ -7,9 +7,14 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="tel" property="tel" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="user_login" property="userLogin" jdbcType="TIMESTAMP" />
+    <result column="user_createtime" property="userCreatetime" jdbcType="TIMESTAMP" />
+    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="user_points" property="userPoints" jdbcType="INTEGER" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_name, password, email, tel, sex
+    user_name, password, email, tel, sex, user_login, user_createtime, user_type, user_points,user_address
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -23,9 +28,14 @@
   </delete>
   <insert id="insert" parameterType="com.cn.hnust.pojo.User" >
     insert into user_t (user_name, password, email, 
-      tel, sex)
+      tel, sex, user_login, 
+      user_createtime, user_type, user_points,user_address
+      )
     values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR})
+      #{tel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{userLogin,jdbcType=TIMESTAMP}, 
+      #{userCreatetime,jdbcType=TIMESTAMP}, #{userType,jdbcType=INTEGER}, #{userPoints,jdbcType=INTEGER},
+      #{userAddress,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cn.hnust.pojo.User" >
     insert into user_t
@@ -45,6 +55,21 @@
       <if test="sex != null" >
         sex,
       </if>
+      <if test="userLogin != null" >
+        user_login,
+      </if>
+      <if test="userCreatetime != null" >
+        user_createtime,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="userPoints != null" >
+        user_points,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userName != null" >
@@ -61,6 +86,21 @@
       </if>
       <if test="sex != null" >
         #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null" >
+        #{userLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCreatetime != null" >
+        #{userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userPoints != null" >
+        #{userPoints,jdbcType=INTEGER},
+      </if>
+       <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +119,21 @@
       <if test="sex != null" >
         sex = #{sex,jdbcType=VARCHAR},
       </if>
+      <if test="userLogin != null" >
+        user_login = #{userLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCreatetime != null" >
+        user_createtime = #{userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userPoints != null" >
+        user_points = #{userPoints,jdbcType=INTEGER},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_name = #{userName,jdbcType=VARCHAR}
   </update>
@@ -87,7 +142,12 @@
     set password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR}
+      sex = #{sex,jdbcType=VARCHAR},
+      user_login = #{userLogin,jdbcType=TIMESTAMP},
+      user_createtime = #{userCreatetime,jdbcType=TIMESTAMP},
+      user_type = #{userType,jdbcType=INTEGER},
+      user_points = #{userPoints,jdbcType=INTEGER},
+      user_address = #{userAddress,jdbcType=INTEGER}
     where user_name = #{userName,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -34,7 +34,7 @@
                    <div class="text">
               <h3><a href="/ssdsd/goodsdetial/${good.goodsId}">${good.goodsName }</a></h3>
                         <ul class="pro_intro">
-                           <li><span class="s1">产地：</span> ${good.goodsName }</li>
+                           <li><span class="s1">产地：</span> ${good.place}</li>
                            <li><span class="s1">销量：</span>${good.salenum }
                            <li><span class="s1">类型：</span>${good.type }</li>
                         </ul>

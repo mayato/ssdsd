@@ -1,11 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>电子书城</title>
 <link rel="stylesheet" href="/ssdsd/css/main.css" type="text/css" />
+  <link rel="stylesheet" href="<%=basePath%>layui/css/layui.css">
+     <script type="text/javascript" src="<%=basePath%>layui/layui.js"></script>
 </head>
 
 <body class="main">
@@ -39,7 +46,7 @@
 											</div>
 
 											<div style="text-align:center; margin-top:25px">
-												<a href="cart.jsp">
+												<a href="<%=basePath%>cart/add?goodsId=${goods.goodsId}">
 													<img src="/ssdsd/img/addtocar.png"  border="0"style="
                                                width: 200px; "/> 
 												</a>
@@ -51,6 +58,8 @@
 											<hr />售价：<font color="#FF0000">${goods.price}</font>
 											<hr /> 
                                                                                                                                                 类别 :${goods.type}
+											<hr />
+											产地 :${goods.place}
 											<hr />
 											<p>
 												<b>简介:</b>
@@ -67,6 +76,24 @@
 
 	<jsp:include page="foot.jsp" />
 
+<script type="text/javascript">
+var path = '<%=basePath%>';
+layui.use([ 'layer', 'form'], function() {
+	var $ = layui.jquery,
+		layer = layui.layer, //获取当前窗口的layer对象
+		form = layui.form();
 
+
+});
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

@@ -17,4 +17,6 @@ public interface IStoreService {
 
 	public Store selectselectByPrimaryKey(Integer id);
 
+	public List<Store> getWithOrder(Integer goodsId, Integer number);
+
 }

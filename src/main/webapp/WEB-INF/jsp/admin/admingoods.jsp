@@ -1,7 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-
-    pageEncoding="utf-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,9 +13,11 @@
         <title></title>
 
         <link href="/ssdsd/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<%=basePath%>layui/css/layui.css">  
         <script src="/ssdsd/js/jquery-3.1.1.min.js"></script>
         <script src="/ssdsd/js/bootstrap/bootstrap.min.js"></script>
         <script src="/ssdsd/js/bootstrap/bootstrap-paginator.min.js"></script>
+        <script type="text/javascript" src="<%=basePath%>layui/layui.js"></script>
         <script src="/ssdsd/js/admingoods.js"></script>
     </head>
     <body>
@@ -43,8 +48,10 @@ alert("操作成功");
                         </li>
                         <li><a href="/ssdsd/admin/adminstore">库存管理</a>
                         </li>
-                        <li><a href="#">订单管理</a>
+                        <li><a href="/ssdsd/admin/adminorder">订单管理</a>
                         </li>
+                        <li ><a href="/ssdsd/admin/admindelivery">出库单管理</a>
+						</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     <c:if test="${sessionScope.aname!=null}">
@@ -139,6 +146,42 @@ alert("操作成功");
                 </div>
             </div>
         </div>
+       <script type="text/javascript">
+       var path = '<%=basePath%>';
+       layui.use(['layer', 'jquery'], function(){
+    		var $ = layui.jquery,
+    			layer = layui.layer;
+       
+       
+       });
+       function  goodsdelete(goodsid){
+       	   layer = layui.layer;
+    	   layer.confirm('确认删除 ？', {icon: 0, title: '提示'}, function(index){
+       	$("#tr"+ goodsid).remove();       	
+           var date={'id':goodsid}; 
+           	 $.ajax({  
+           	       data:date,
+           	       type:"post",  
+           	     dataType: 'json', 
+           	       url:"/ssdsd/cancel/good",
+           	       async:false,
+           	       error:function(data){  
+           	           alert("服务器繁忙");  
+           	       },
+           	       success:function(data){
+           	    	   if(data.msg=="1"){	   
+           	    		   $("#tr"+ goodsid).remove();
+           	    	   }
+           	       }
+           	 });
+            	layer.close(index);
+    	   });
+           };
+       
+       
+       
+       
+       </script> 
     </body>
 
 </html>

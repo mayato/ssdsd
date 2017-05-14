@@ -20,6 +20,13 @@
 	    	 $("#txt_password").val("");
 	 	});   
 	    }
+	    
+	    $('body').keydown(function(e){
+	        if(e.keyCode == 13){
+	        	ajaxTest();
+	        }
+	    }); 
+	    
 	  });
    function ajaxTest(){  
        $.ajax({  

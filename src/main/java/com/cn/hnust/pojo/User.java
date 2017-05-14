@@ -1,5 +1,7 @@
 package com.cn.hnust.pojo;
 
+import java.util.Date;
+
 public class User {
     private String userName;
 
@@ -10,6 +12,16 @@ public class User {
     private String tel;
 
     private String sex;
+
+    private Date userLogin;
+
+    private Date userCreatetime;
+
+    private Integer userType;
+
+    private Integer userPoints;
+    
+    private String userAddress;
 
     public String getUserName() {
         return userName;
@@ -50,4 +62,46 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
     }
+
+    public Date getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(Date userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    public Date getUserCreatetime() {
+        return userCreatetime;
+    }
+
+    public void setUserCreatetime(Date userCreatetime) {
+        this.userCreatetime = userCreatetime;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public Integer getUserPoints() {
+        return userPoints;
+    }
+
+    public void setUserPoints(Integer userPoints) {
+        this.userPoints = userPoints;
+    }
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+    
+    
 }

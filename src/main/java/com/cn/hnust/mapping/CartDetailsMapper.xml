@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.hnust.dao.ICartDetailsDao" >
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.CartDetails" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="total_price" property="totalPrice" jdbcType="DOUBLE" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+  </resultMap>
+   <resultMap id="CartDetailModel" type="com.cn.hnust.model.CartDetailModel" extends="BaseResultMap">
+     <result column="m_goods_url" property="goodsUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cart_id, goods_id, goods_price, total_price, number, goods_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart_details
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cart_details
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.cn.hnust.pojo.CartDetails" >
+    insert into cart_details ( cart_id, goods_id, 
+      goods_price, total_price, number, 
+      goods_name)
+    values ( #{cartId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{goodsPrice,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE}, #{number,jdbcType=INTEGER}, 
+      #{goodsName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.CartDetails" >
+    insert into cart_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cartId != null" >
+        cart_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cartId != null" >
+        #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.CartDetails" >
+    update cart_details
+    <set >
+      <if test="cartId != null" >
+        cart_id = #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.CartDetails" >
+    update cart_details
+    set cart_id = #{cartId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      total_price = #{totalPrice,jdbcType=DOUBLE},
+      number = #{number,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <update id="updateprice" >
+    update cart_details 
+    set goods_price = #{price,jdbcType=INTEGER},
+    total_price=number*${price}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  
+    <select id="getByCartID" resultMap="CartDetailModel" >
+    select c.*,
+    m.url AS m_goods_url
+    from cart_details c
+    LEFT JOIN goods m
+    ON m.goods_id=c.goods_id
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </select>
+  
+   <select id="getByCartIDAndGoodsID" resultMap="BaseResultMap" >
+    select c.*
+    from cart_details c
+    where cart_id = #{cartId,jdbcType=INTEGER}
+    AND goods_id= #{goodsId,jdbcType=INTEGER}
+  </select>
+</mapper>

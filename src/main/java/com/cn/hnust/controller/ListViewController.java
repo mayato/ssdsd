@@ -28,7 +28,7 @@ public class ListViewController {
 		ModelAndView model=new ModelAndView();
 		model.setViewName("product_list");
 		
-		PageHelper.startPage(page, 2);
+		PageHelper.startPage(page, 10);
 		List<Goods> goods = goodsService.getgoodsDesc();
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
 		System.out.println(p.getList());
@@ -41,13 +41,19 @@ public class ListViewController {
 		
 		return model;
 	}
+	/**
+	 * 列表分类
+	 * @param type
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping("/goodstype/{type}")
 	public ModelAndView  goodslistchoose(@PathVariable("type") String type,
 			@RequestParam(required=true,defaultValue="1") Integer page) {
 		
 		ModelAndView model=new ModelAndView();
 		model.setViewName("product_type");
-		PageHelper.startPage(page, 2);
+		PageHelper.startPage(page, 10);
 		List<Goods> goods = goodsService.getgoodschoose(type);
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
 		System.out.println(p.getList());
@@ -60,13 +66,19 @@ public class ListViewController {
 		
 		return model;
 	}
+	/**
+	 * 列表搜索
+	 * @param name
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping("/findProductBySearch")
 	public ModelAndView search(@RequestParam String name,
 			@RequestParam(required=true,defaultValue="1") Integer page) {
 		ModelAndView model=new ModelAndView();
 		System.out.println(name);
 		model.setViewName("product_search");
-		PageHelper.startPage(page, 2);
+		PageHelper.startPage(page, 10);
 		List<Goods> goods = goodsService.selectByNameLike(name);
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
 		System.out.println(p.getList());
@@ -79,4 +91,6 @@ public class ListViewController {
 		model.addObject("name",name);
 		return model;
 	}
+
+	
 }

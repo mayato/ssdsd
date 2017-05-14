@@ -45,8 +45,10 @@
                         </li>
                         <li><a href="/ssdsd/admin/adminstore">库存管理</a>
                         </li>
-                        <li><a href="#">订单管理</a>
+                        <li><a href="/ssdsd/admin/adminorder">订单管理</a>
                         </li>
+                        <li ><a href="/ssdsd/admin/admindelivery">出库单管理</a>
+						</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     <c:if test="${sessionScope.aname!=null}">

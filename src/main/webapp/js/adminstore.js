@@ -114,7 +114,7 @@
              	    });
                });
         }  
-        function  goodsdelete(sId){
+/*        function  goodsdelete(sId){
         	$("#tr"+ sId).remove();       	
             var date={'id':sId}; 
             	 $.ajax({  
@@ -132,7 +132,7 @@
             	    	   }
             	       }
             	 });
-            };
+            };*/
             function  goodsModify(sId){  	
                 var date={'id':sId}; 
                 	 $.ajax({  

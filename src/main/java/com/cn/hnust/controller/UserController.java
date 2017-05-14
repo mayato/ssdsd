@@ -2,15 +2,19 @@ package com.cn.hnust.controller;
   
 import java.io.Console;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +25,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cn.hnust.pojo.User;  
+import com.cn.hnust.pojo.Order;
+import com.cn.hnust.pojo.OrderDetails;
+import com.cn.hnust.pojo.User;
+import com.cn.hnust.service.IOrderDetailService;
+import com.cn.hnust.service.IOrderService;
 import com.cn.hnust.service.IUserService;
 import com.sun.javafx.collections.MappingChange.Map;  
 
@@ -33,11 +41,16 @@ import com.sun.javafx.collections.MappingChange.Map;
     public class UserController {
         @Resource
         private IUserService userService;
+        @Autowired
+        private IOrderService orderService;
+        @Autowired
+        private IOrderDetailService orderDetailService;
  
        @RequestMapping("/loginjson")
        public @ResponseBody HashMap<String, Object> login(@RequestParam String userName,@RequestParam String password,Model model) throws IOException{  
            /*System.out.println(request.getParameter("userName"));  */
            HashMap<String, Object> map = new HashMap<String,Object>();
+           
            User user=userService.getUserByName(userName);
                    
            if (user==null) {
@@ -45,6 +58,8 @@ import com.sun.javafx.collections.MappingChange.Map;
         	   return map; 
 		  }  
            if(user.getPassword().equals(password)){  
+        	   user.setUserLogin(new Date());
+        	   userService.updateByPrimaryKeySelective(user);
                map.put("msg", "成功");
                model.addAttribute("uname", userName); 
            }else{  
@@ -75,6 +90,8 @@ import com.sun.javafx.collections.MappingChange.Map;
        public ModelAndView register(User user){
     	   /*System.out.println("userName is:"+user.getUserName());
     	   System.out.println("userName is:"+user.getSex());*/
+    	   user.setUserCreatetime(new Date());
+    	   user.setUserType(1);
            int i=this.userService.addUser(user);
            String url="";
            ModelAndView view = new ModelAndView();
@@ -101,7 +118,41 @@ import com.sun.javafx.collections.MappingChange.Map;
         	   ModelAndView view1 = new ModelAndView(view);
                return view1;
        }
-     
+/**
+ * 用户详情
+ * @param session
+ * @return
+ */
+       @RequestMapping("/detail")  
+       public ModelAndView detail(HttpSession session){
+    	   String userName = (String) session.getAttribute("uname");
+    	   if(StringUtils.isEmpty(userName)){
+    		   return new ModelAndView("login");
+    	   }
+    	   User user = userService.getUserByName(userName);
+    	  List<Order> orderList = orderService.getbyuserName(userName);
+    	   ModelAndView view = new ModelAndView("userdetail").addObject("user",user)
+    	    .addObject("orderList", orderList);
+           return view;
+       }
+       
+       @RequestMapping("/update")
+       @ResponseBody
+       public  HashMap<String, Object> update(User user,HttpSession session){  
+           /*System.out.println(request.getParameter("userName"));  */
+    	   
+    	   String userName = (String) session.getAttribute("uname");
+    	   user.setUserName(userName);
+           HashMap<String, Object> map = new HashMap<String,Object>();
+           int count = userService.updateByPrimaryKeySelective(user);
+           System.out.println(count);
+           if(count!=0){
+        	   map.put("code", 1);
+           }else{
+           map.put("code", 0);
+           }
+           return map;  
+       } 
      
          
          

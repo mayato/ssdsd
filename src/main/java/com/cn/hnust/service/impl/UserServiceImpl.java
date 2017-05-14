@@ -39,4 +39,9 @@ public class UserServiceImpl implements IUserService {
         // TODO Auto-generated method stub
         return this.userDao.updateByPrimaryKeySelective(user);
     }
+    
+    public int updateByPrimaryKeySelective(User user){
+    	
+    	return userDao.updateByPrimaryKeySelective(user);
+    }
 }

@@ -37,7 +37,7 @@
   select  s.*,g.*,w.* from store s join goods g on s.goods_id = g.goods_id join warehouse w on s.warehouse_id = w.warehouse_id 
   </select>
   <select id="selectByNameLike" resultMap="BaseResultMap">
-  select  s.*,g.*,w.* from store s join goods g on s.goods_id = g.goods_id join warehouse w on s.warehouse_id = w.warehouse_id where g.goods_name like #{storeName}
+  select  s.*,g.*,w.* from store s join goods g on s.goods_id = g.goods_id join warehouse w on s.warehouse_id = w.warehouse_id where g.goods_name like  CONCAT('%',#{storeName},'%')
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
    delete from store
@@ -111,6 +111,25 @@
     <include refid="Base_Column_List" />
     from store
     where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectBygoodsIdAndwarehouseId" resultMap="NewResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+    and warehouse_id= #{warehouseId,jdbcType=INTEGER}
+  </select>
+  
+    <select id="getWithOrder" resultMap="BaseResultMap"  >
+    select a.*,b.*,c.*
+    from store AS a
+    left join goods AS b
+    ON b.goods_id=a.goods_id
+    left join warehouse AS c
+    ON c.warehouse_id=a.warehouse_id
+    where a.goods_id = #{goodsId,jdbcType=INTEGER}
+    and a.number >= #{number,jdbcType=INTEGER}
   </select>
   
 </mapper>

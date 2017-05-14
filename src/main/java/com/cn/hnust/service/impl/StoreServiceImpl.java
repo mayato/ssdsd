@@ -3,6 +3,7 @@ package com.cn.hnust.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,15 @@ public IStoreDao storeDao;
 		
 		return storeDao.deleteByPrimaryKey(id);
 	}
+	@SuppressWarnings("null")
 	@Override
+	@Transactional
 	public int insertSelective(Store store) {
 		
+		List<Store> list = storeDao.selectBygoodsIdAndwarehouseId(store.getGoodsId(),store.getWarehouseId());
+		if(list!=null&&list.size()!=0){
+			return 0;
+		}
 		return storeDao.insertSelective(store);
 	}
 	@Override
@@ -43,6 +50,11 @@ public IStoreDao storeDao;
 	public Store selectselectByPrimaryKey(Integer sid) {
 		
 		return storeDao.selectByPrimaryKey(sid);
+	}
+	@Override
+	public List<Store> getWithOrder(Integer goodsId, Integer number) {
+		
+		return storeDao.getWithOrder(goodsId,number);
 	}
 
 }

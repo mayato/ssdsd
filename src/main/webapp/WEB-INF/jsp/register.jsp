@@ -58,7 +58,7 @@
                                 女
           </label>
         </p>
-        <p class="submit"><a href="/ssdsd/login.jsp"><input type="button" value="返回"><input type="submit" name="commit" value="确认" id="sub"></a></p>
+        <p class="submit"><a href="/ssdsd/user/showview/login"><input type="button" value="返回"><input type="submit" name="commit" value="确认" id="sub"></a></p>
       </form>      
     </div>
     <!-- <div class="login-help">

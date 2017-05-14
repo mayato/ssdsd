@@ -13,6 +13,7 @@ public class Store {
     
     private Goods  goods;
     private Warehouse  warehouse;
+    
  
     public Integer getGoodsId() {
 		return goodsId;

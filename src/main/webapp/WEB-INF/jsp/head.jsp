@@ -9,7 +9,7 @@
 				<c:if test="${sessionScope.uname!=null}">
 			<td id="nouser" style="text-align:right;color:red"><img src="/ssdsd/img/cart.png"
 				width="26" height="23" style="margin-bottom:-4px" />&nbsp;
-				<a href="cart.jsp">购物车</a>||欢迎用户:${sessionScope.uname}|<a href="/ssdsd/user/cancel">退出登陆</a></td>
+				<a href="/ssdsd/cart/list">购物车</a>||欢迎用户:<a href="/ssdsd/user/detail">${sessionScope.uname}</a>|<a href="/ssdsd/user/cancel">退出登陆</a></td>
 				  </c:if>
 				  <c:if test="${sessionScope.uname==null}">
 			<td id="haveuser" style="text-align:right"><img src="/ssdsd/img/tologin.png"

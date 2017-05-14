@@ -33,7 +33,7 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 
 @Controller
 @SessionAttributes({"aname"}) 
-public class adminGoodsController {
+public class AdminGoodsController {
 	@Resource
 	 private IGoodsService goodsService;
 	@Resource
@@ -56,7 +56,7 @@ public class adminGoodsController {
 		}		
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
 		System.out.println(p.getList());
-		if (pageNumber==0||p.getPages()==0) {
+		if (pageNumber==0) {
 			map.put("isError", true);	
 			return map;
 		}
@@ -99,6 +99,13 @@ public class adminGoodsController {
 	public String index(Model model) {	
 		return "admin/adminindex";
 	}
+	/**
+	 * 返回界面
+	 * @param model
+	 * @param view
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/admin/{view}")
 	public String show(Model model,@PathVariable("view") String view,
 			@RequestParam(value="id",required=false) Integer id ) {
@@ -142,8 +149,8 @@ public class adminGoodsController {
      public ModelAndView add( MultipartFile file, HttpServletRequest request,
  			Goods goods, String categoryName){
 		 
-			 String path = request.getSession().getServletContext() .getRealPath("upload");
-			 System.out.println(path);
+			 /*String path = request.getSession().getServletContext() .getRealPath("/upload");*/
+		 String path="D:/upload";
 			 String fileName = file.getOriginalFilename();
 			 File targetFile = new File(path, fileName);
 			 goods.setUrl(fileName);
