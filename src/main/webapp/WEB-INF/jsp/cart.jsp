@@ -132,7 +132,7 @@ function settlement(){
 					window.location.href="/ssdsd/cart/list"; 	
 				});	
 		    }if(data.code==0){
-				layer.msg('下单失败', {icon: 1, time: 1000},function(){
+				layer.msg('下单失败', {icon: 2, time: 1000},function(){
 					 window.location.href="/ssdsd/cart/list"; 	 
 				});	
 		    }

@@ -49,7 +49,6 @@ public class CartController {
 	 */
 	@RequestMapping("/list")
 	public ModelAndView cartList(HttpSession session){
-
 	  String userName=(String) session.getAttribute("uname");
 	  if(StringUtils.isEmpty(userName)){
 		  return new ModelAndView("login");  
@@ -57,18 +56,14 @@ public class CartController {
 	 
 	  Cart cart=cartService.getByUser(userName);
 	  if(StringUtils.isEmpty(cart)){
-		  
 		  return new ModelAndView("cart").addObject("error", "购物车为空");
 	  }
 	 System.out.println(cart.getId());
-	  
 	   List<CartDetailModel> cartDetailList= cartDetailService.getByCartID(cart.getId());
 	   if(cartDetailList==null||cartDetailList.size()==0){
-		   
 		   return new ModelAndView("cart").addObject("error", "购物车为空");
 		   
-	   }
-	  	
+	   }	
 	    cartService.updatePrice(cart.getId());
 		return new ModelAndView("cart").addObject("cartDetailList", cartDetailList);
 	}

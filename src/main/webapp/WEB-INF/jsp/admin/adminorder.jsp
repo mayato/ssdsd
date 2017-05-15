@@ -138,7 +138,7 @@ alert("操作成功");
                                     <th>商品单价</th>
                                     <th>总共价格</th>
                                     <th>仓库</th>
-                                    <th>数量</th>
+                                    <th>库存数量</th>
                                 </tr>
                             </thead>
                             <tbody id="orderBody">
@@ -161,7 +161,7 @@ alert("操作成功");
     <select class="store" name="store">
 	</select>
  </td>
- <td class="number">0</td>
+ <td class="number1">0</td>
   </tr>
 </script>
        <script type="text/javascript">
@@ -173,7 +173,7 @@ alert("操作成功");
        $("#orderBody").on("change",".store",function(){
     	   
     	  var number= $(this).children("option:selected").attr("number");
-    	   $(this).parents("tr").find(".number").text(number);    	   
+    	   $(this).parents("tr").find(".number1").text(number);    	   
     	   
        });
        

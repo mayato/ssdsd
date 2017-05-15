@@ -152,7 +152,7 @@ public class OrderController {
 			return map;
 		} catch (Exception e) {
 			map.put("code", 0);	
-			LoggerUtil.error("删除失败",e);
+			LoggerUtil.error("获取详情失败",e);
 			return map;
 		}
 	

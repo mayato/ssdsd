@@ -12,10 +12,13 @@
 <head>
 <title>bookStore列表</title>
 <%--导入css --%>
+ <link href="/ssdsd/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/ssdsd/css/main.css" type="text/css" />
 <link rel="stylesheet" href="/ssdsd/css/list.css" type="text/css" />
   <link rel="stylesheet" href="<%=basePath%>layui/css/layui.css">
 <script type="text/javascript" src="/ssdsd/js/jquery-3.1.1.min.js"></script>
+<script src="/ssdsd/js/bootstrap/bootstrap.min.js"></script>
+ <script src="/ssdsd/js/bootstrap/bootstrap-paginator.min.js"></script>
 <script type="text/javascript" src="/ssdsd/js/list.js"></script>
    <script type="text/javascript" src="<%=basePath%>layui/layui.js"></script>
   <style type="text/css">
@@ -80,7 +83,7 @@
     <div class="layui-inline-short layui-inline-short-right">
       <label class="layui-form-label">会员积分</label>
       <div class="layui-input-inline">
-        <input type="text" name="userPoints" lay-verify="" autocomplete="off" class="layui-input" value="${user.userPoints}">
+        <input type="text" name="userPoints"  disabled lay-verify="" autocomplete="off" class="layui-input" value="${user.userPoints}">
       </div>
      </div>
     </div>
@@ -112,6 +115,7 @@
 		      <th>用户名</th>
 		      <th>价格</th>
 		      <th>配送地址</th>
+		      <th>详情</th>
 		      
 		    </tr> 
 		  </thead>
@@ -128,6 +132,7 @@
 		        <td>${order.userName}</td>
 		        <td>${order.price}</td>
 		        <td>${order.orderAddress}</td>
+		        <td><button   class="layui-btn layui-btn-primary layui-btn-small" onclick="goodsModify(${order.id});return false;">详情</button> </td>
 		       </tr>
 		       </c:forEach>
 		  </tbody>
@@ -138,6 +143,25 @@
     
     
     </div>
+    <div id="detail" style="display:none;padding:20px 20px 10px 0px;">
+                    <div class="table-responsive">
+                        <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                    <th>订单ID</th>
+                                    <th>商品</th>
+                                    <th>商品名称</th>
+                                    <th>商品数量</th>
+                                    <th>商品单价</th>
+                                    <th>总共价格</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderBody">
+                           
+			               </tbody>
+                        </table>
+                    </div>
+      </div>
   </div>
 </div> 
    
@@ -150,6 +174,18 @@
 	</div>	
 	</div>
 	<jsp:include page="foot.jsp" />
+<script id="orderTemplate" type="text/html">
+  <tr>
+  <td style="display:none;" class="id" value="" name="id"></td>
+  <td style="display:none;" class="goodsUrl" value="" name="goodsUrl"></td>
+  <td class="orderId" text=""></td>
+  <td class="goodsId"></td>
+  <td class="goodsName"></td>
+  <td class="number"></td>
+  <td class="goodsPrice"></td>
+  <td class="totalPrice"></td>
+  </tr>
+</script>
 
 <script type="text/javascript">
 var path = '<%=basePath%>';
@@ -176,6 +212,64 @@ layui.use(['tree', 'layer', 'form','element'], function() {
 	    return false;
 	  });
 });
+//详情
+function  goodsModify(id,that){
+	var $ = layui.jquery
+	,layer = layui.layer
+	,form = layui.form();
+	var loading = layer.load(2);
+var data={'id':id}; 
+	 $.ajax({  
+	       data:data,
+	       type:"post",  
+	      dataType: 'json', 
+	       url:"/ssdsd/order/detail",
+	       error:function(data){ 
+	    	layer.close(loading);
+	           alert("服务器繁忙");  
+	       },
+	       success:function(data){
+	    	   console.info(data);
+	    	layer.close(loading);
+	    	   if(data.code=="1"){
+	    		   console.info(data);
+	    		$('#orderBody').html('');
+	    		$.each(data.list, function(i, detail) {
+	    			var orderEle = $($("#orderTemplate").get(0).innerHTML);
+	    			orderEle.find(".id").attr("value",detail.id);
+	    			orderEle.find(".goodsUrl").attr("value",detail.goodsUrl);
+	    			
+	    			orderEle.find(".orderId").text(detail.orderId);
+	    			orderEle.find(".orderId").attr("text",detail.orderId);
+	    			
+	    			orderEle.find(".goodsId").text(detail.goodsId);
+	    			orderEle.find(".goodsId").attr("text",detail.goodsId);
+	    			
+	    			orderEle.find(".goodsName").text(detail.goodsName);
+	    			orderEle.find(".goodsName").attr("text",detail.goodsName);
+	    			
+	    			orderEle.find(".number").text(detail.number);
+	    			orderEle.find(".number").attr("text",detail.number);
+	    			
+	    			orderEle.find(".goodsPrice").text(detail.goodsPrice);
+	    			orderEle.find(".goodsPrice").attr("text",detail.goodsPrice);
+	    			
+	    			orderEle.find(".totalPrice").text(detail.totalPrice);
+	    			orderEle.find(".totalPrice").attr("text",detail.totalPrice);
+
+	    			$('#orderBody').append(orderEle);
+	    		});
+	    	   }
+	       }
+	 });	  
+	var layerIdx = layer.open({
+		type: 1,
+		title: '订单详情',
+		btn: ['关闭'],
+		area: ['960px', '500px'],
+		content: $('#detail')
+	});
+}
 
 </script>
 </body>

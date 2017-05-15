@@ -64,8 +64,6 @@ public class AdminGoodsController {
 		 map.put("pages", p.getPages());
 		 map.put("currentPage", p.getPageNum());
 		 map.put("dataList", goods);
-		/*model.addObject("goods", goods);*/
-		/*model.addObject("page",p);*/
 		return map;
 	}
 	@RequestMapping("/cancel/good")  

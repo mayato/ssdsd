@@ -85,10 +85,10 @@ public class OrderServiceImpl implements IOrderService{
 			cartDetailModel.getGoodsId();
 			cartDetailModel.getNumber();
 			Goods goods = goodsDao.selectByPrimaryKey(cartDetailModel.getGoodsId());
-			int num=goods.getSalenum();
+			Integer num=goods.getSalenum();
 			num+=cartDetailModel.getNumber();
 			goods.setSalenum(num);
-			int count1 = goodsDao.updateByPrimaryKeySelective(goods);
+			Integer count1 = goodsDao.updateByPrimaryKeySelective(goods);
 		}
 		
 		user.setUserPoints(user.getUserPoints()+price.intValue());

@@ -26,8 +26,6 @@ public class ListViewController {
 			@RequestParam(required=true,defaultValue="1") Integer page) {
 		
 		ModelAndView model=new ModelAndView();
-		model.setViewName("product_list");
-		
 		PageHelper.startPage(page, 10);
 		List<Goods> goods = goodsService.getgoodsDesc();
 		PageInfo<Goods> p=new PageInfo<Goods>(goods);
@@ -38,7 +36,6 @@ public class ListViewController {
 		}
 		model.addObject("goods", goods);
 		model.addObject("page",p);
-		
 		return model;
 	}
 	/**
@@ -63,7 +60,6 @@ public class ListViewController {
 		}
 		model.addObject("goods", goods);
 		model.addObject("page",p);
-		
 		return model;
 	}
 	/**

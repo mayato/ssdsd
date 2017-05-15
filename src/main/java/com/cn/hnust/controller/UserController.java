@@ -48,11 +48,8 @@ import com.sun.javafx.collections.MappingChange.Map;
  
        @RequestMapping("/loginjson")
        public @ResponseBody HashMap<String, Object> login(@RequestParam String userName,@RequestParam String password,Model model) throws IOException{  
-           /*System.out.println(request.getParameter("userName"));  */
            HashMap<String, Object> map = new HashMap<String,Object>();
-           
-           User user=userService.getUserByName(userName);
-                   
+           User user=userService.getUserByName(userName);        
            if (user==null) {
         	   map.put("msg", "用户名不存在");
         	   return map; 
@@ -88,15 +85,12 @@ import com.sun.javafx.collections.MappingChange.Map;
        } 
        @RequestMapping("/register")  
        public ModelAndView register(User user){
-    	   /*System.out.println("userName is:"+user.getUserName());
-    	   System.out.println("userName is:"+user.getSex());*/
     	   user.setUserCreatetime(new Date());
     	   user.setUserType(1);
            int i=this.userService.addUser(user);
            String url="";
            ModelAndView view = new ModelAndView();
 		   if(i>0){
-        	   System.out.println(1);
                url="login";
                view.addObject("resuccess","注册成功");
            }else{
